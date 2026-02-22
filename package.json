@@ -1,0 +1,23 @@
+{
+  "name": "equipment-tracker-pmc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+  "test": "jest"
+},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SShang93/equipment-tracker-pmc.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SShang93/equipment-tracker-pmc/issues"
+  },
+  "homepage": "https://github.com/SShang93/equipment-tracker-pmc#readme",
+  "devDependencies": {
+    "jest": "^30.2.0"
+  }
+}
