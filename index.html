@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Equipment Tracker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+
+    <main>
+        <div class="text-center my-4">
+            <h1>Equipment Tracker</h1>
+        </div>
+        <div class="container card mx-auto p-4 mb-4">
+            <section>
+                <h2>Add Equipment</h2>
+
+                <form id="equipment-form">
+
+                    <label>
+                        Equipment Name:
+                        <input type="text" id="name" required>
+                    </label>
+
+                    <label>
+                        Site:
+                        <input type="text" id="site" required>
+                    </label>
+
+                    <label>
+                        Daily Rate (£):
+                        <input type="number" id="rate" required>
+                    </label>
+
+                    <label>
+                        Start Date:
+                        <input type="date" id="start-date" required>
+                    </label>
+
+                    <div class="text-center mt-3">
+                        <button type="submit">Add Equipment</button>
+                    </div>
+                </form>
+        </div>
+
+        </section>
+
+        <!-- Active Equipment -->
+        <section>
+            <div class="container card mx-auto p-4 mb-4">
+                <h2>Active Equipment</h2>
+                <ul id="active-list"></ul>
+                <p>Total Active Cost: £<span id="total-active">0</span></p>
+            </div>
+        </section>
+
+        <!-- Archived Equipment -->
+        <section>
+            <div class="container card mx-auto p-4 mb-4">
+                <h2>Archived Equipment</h2>
+                <ul id="archived-list"></ul>
+                <p>Total Archived Cost: £<span id="total-archived">0</span></p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- JavaScript -->
+    <script src="assets/scripts/app.js" defer></script>
+
+</body>
+
+</html>
