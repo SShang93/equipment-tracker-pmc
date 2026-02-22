@@ -1,0 +1,13 @@
+/* Remove bullets + default padding */
+#active-list,
+#archived-list {
+  list-style: none;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+/* Optional: space items nicely */
+#active-list li,
+#archived-list li {
+  margin: 8px 0;
+}
