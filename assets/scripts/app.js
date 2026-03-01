@@ -1,6 +1,6 @@
 // ---------- STATE ---------- //
 const STORAGE_KEY = "equipmentTracker_v1";
-let equipmentList = loadFromStorage();
+let equipmentList = [];
 
 // ---------- ELEMENTS ---------- //
 const form = document.getElementById("equipment-form");
@@ -16,14 +16,49 @@ const totalActiveEl = document.getElementById("total-active");
 const totalArchivedEl = document.getElementById("total-archived");
 
 // ---------- INIT ---------- //
-setDefaultStartDate();
-render();
+function init() {
+  // Prevent crashes if DOM not present (e.g. during Jest tests)
+  if (!form || !startDateInput || !activeListEl || !archivedListEl || !totalActiveEl || !totalArchivedEl) {
+    return;
+  }
 
-// ---------- EVENTS ---------- //
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  addEquipmentFromForm();
-});
+  equipmentList = loadFromStorage();
+  setDefaultStartDate();
+  render();
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    addEquipmentFromForm();
+  });
+}
+
+// Only auto-run in browser
+if (typeof window !== "undefined") {
+  init();
+}
+
+// Export for Jest
+if (typeof module !== "undefined") {
+  module.exports = {
+    setDefaultStartDate,
+    addEquipmentFromForm,
+    createEquipment,
+    generateId,
+    render,
+    renderGroupedBySite,
+    groupBySite,
+    handleListClick,
+    archiveEquipment,
+    restoreEquipment,
+    deleteEquipment,
+    calcTotal,
+    calcHireCost,
+    saveToStorage,
+    loadFromStorage,
+    escapeHtml,
+    init
+  };
+}
 
 
 // FUNCTIONS //
@@ -140,27 +175,6 @@ function groupBySite(items) {
   }, {});
 }
 
-  // render archived
-  archivedItems.forEach(item => {
-    const li = document.createElement("li");
-    li.innerHTML = `
-      <strong>${escapeHtml(item.name)}</strong>
-      <span class="meta">(${escapeHtml(item.site)}) archived ${item.archivedDate || ""}</span>
-      <button data-action="restore" data-id="${item.id}">Restore</button>
-      <button data-action="delete" data-id="${item.id}">Delete</button>
-    `;
-    archivedListEl.appendChild(li);
-  });
-
-  // button handlers (event delegation)
-  activeListEl.onclick = handleListClick;
-  archivedListEl.onclick = handleListClick;
-
-  // totals
-  totalActiveEl.textContent = calcTotal(activeItems).toFixed(2);
-  totalArchivedEl.textContent = calcTotal(archivedItems).toFixed(2);
-
-
 function handleListClick(e) {
   const btn = e.target.closest("button");
   if (!btn) return;
@@ -235,16 +249,4 @@ function escapeHtml(str) {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
-}
-
-// ---------- EXPORTS FOR JEST ----------
-if (typeof module !== "undefined") {
-  module.exports = {
-    createEquipment,
-    calcHireCost,
-    calcTotal,
-    generateId,
-    loadFromStorage,
-    saveToStorage
-  };
 }
