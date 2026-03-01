@@ -15,10 +15,25 @@ const archivedListEl = document.getElementById("archived-list");
 const totalActiveEl = document.getElementById("total-active");
 const totalArchivedEl = document.getElementById("total-archived");
 
+// ---------- DEPS (for testing) ---------- //
+const deps = {
+  createEquipment,
+  saveToStorage,
+  setDefaultStartDate,
+  render,
+};
+
 // ---------- INIT ---------- //
 function init() {
   // Prevent crashes if DOM not present (e.g. during Jest tests)
-  if (!form || !startDateInput || !activeListEl || !archivedListEl || !totalActiveEl || !totalArchivedEl) {
+  if (
+    !form ||
+    !startDateInput ||
+    !activeListEl ||
+    !archivedListEl ||
+    !totalActiveEl ||
+    !totalArchivedEl
+  ) {
     return;
   }
 
@@ -56,13 +71,12 @@ if (typeof module !== "undefined") {
     saveToStorage,
     loadFromStorage,
     escapeHtml,
-    init
+    init,
+    deps,
   };
 }
 
-
 // FUNCTIONS //
-
 
 function setDefaultStartDate() {
   // sets the date input to today if it is empty
@@ -80,14 +94,14 @@ function addEquipmentFromForm() {
 
   if (!name || !site || !rate || !startDate) return;
 
-  const newItem = createEquipment(name, site, rate, startDate);
+  const newItem = deps.createEquipment(name, site, rate, startDate);
 
   equipmentList.push(newItem);
-  saveToStorage(equipmentList);
+  deps.saveToStorage(equipmentList);
 
   form.reset();
-  setDefaultStartDate();
-  render();
+  deps.setDefaultStartDate();
+  deps.render();
 }
 
 function createEquipment(name, site, rate, startDate) {
@@ -98,7 +112,7 @@ function createEquipment(name, site, rate, startDate) {
     rate,
     startDate,
     isArchived: false,
-    archivedDate: null
+    archivedDate: null,
   };
 }
 
@@ -111,8 +125,8 @@ function render() {
   activeListEl.innerHTML = "";
   archivedListEl.innerHTML = "";
 
-  const activeItems = equipmentList.filter(item => !item.isArchived);
-  const archivedItems = equipmentList.filter(item => item.isArchived);
+  const activeItems = equipmentList.filter((item) => !item.isArchived);
+  const archivedItems = equipmentList.filter((item) => item.isArchived);
 
   renderGroupedBySite(activeItems, activeListEl, "active");
   renderGroupedBySite(archivedItems, archivedListEl, "archived");
@@ -132,14 +146,14 @@ function renderGroupedBySite(items, containerEl, mode) {
     return;
   }
 
-  sites.forEach(siteName => {
+  sites.forEach((siteName) => {
     // Site heading
     const siteHeader = document.createElement("li");
     siteHeader.innerHTML = `<h3>${escapeHtml(siteName)}</h3>`;
     containerEl.appendChild(siteHeader);
 
     // Items under site
-    groups[siteName].forEach(item => {
+    groups[siteName].forEach((item) => {
       const li = document.createElement("li");
 
       if (mode === "active") {
@@ -188,7 +202,7 @@ function handleListClick(e) {
 }
 
 function archiveEquipment(id) {
-  const item = equipmentList.find(x => x.id === id);
+  const item = equipmentList.find((x) => x.id === id);
   if (!item) return;
 
   item.isArchived = true;
@@ -199,7 +213,7 @@ function archiveEquipment(id) {
 }
 
 function restoreEquipment(id) {
-  const item = equipmentList.find(x => x.id === id);
+  const item = equipmentList.find((x) => x.id === id);
   if (!item) return;
 
   item.isArchived = false;
@@ -210,14 +224,17 @@ function restoreEquipment(id) {
 }
 
 function deleteEquipment(id) {
-  equipmentList = equipmentList.filter(x => x.id !== id);
+  equipmentList = equipmentList.filter((x) => x.id !== id);
   saveToStorage(equipmentList);
   render();
 }
 
 function calcTotal(list) {
   // simple total: rate * days since start
-  return list.reduce((sum, item) => sum + calcHireCost(item.rate, item.startDate), 0);
+  return list.reduce(
+    (sum, item) => sum + calcHireCost(item.rate, item.startDate),
+    0,
+  );
 }
 
 function calcHireCost(rate, startDate) {
