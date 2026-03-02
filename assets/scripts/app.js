@@ -241,9 +241,21 @@ function calcHireCost(rate, startDate) {
   const start = new Date(startDate);
   const today = new Date();
 
-  // milliseconds to days
-  const diffMs = today - start;
-  const days = Math.max(1, Math.ceil(diffMs / (1000 * 60 * 60 * 24)));
+  // Strip time from both dates (calendar-day logic)
+  const startDateOnly = new Date(
+    start.getFullYear(),
+    start.getMonth(),
+    start.getDate()
+  );
+
+  const todayDateOnly = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate()
+  );
+
+  const diffMs = todayDateOnly - startDateOnly;
+  const days = Math.max(1, diffMs / (1000 * 60 * 60 * 24));
 
   return rate * days;
 }
