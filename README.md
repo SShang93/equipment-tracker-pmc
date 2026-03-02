@@ -106,13 +106,11 @@ The interface follows a SaaS-style layout:
 4. Technologies Used
 ---
 
-HTML5
+HTML
 
-CSS3 (Flexbox, Grid, Media Queries, Variables)
+CSS (Flexbox, Grid, Media Queries, Variables)
 
 JavaScript (ES6)
-
-LocalStorage API
 
 Bootstrap (layout utilities)
 
@@ -126,38 +124,35 @@ Jest (unit testing)
 
 Add equipment with validation
 
+![Add Equipment](assets/images/equipment%20added.png)
+![Equipment added to list](assets/images/added%20equipment%20and%20grouped.png)
+
 Group equipment by site
+
+![Grouped equipment by site](assets/images/added%20equipment%20and%20grouped.png)
 
 Archive equipment (auto records end date)
 
+![Archived equipment](assets/images/archived%20equipment.png)
+
 Restore archived equipment
+
+![restored equipment](assets/images/archived%20to%20active.png)
+![restored confirmed](assets/images/archive%20to%20active%20confirmed.png)
 
 Delete equipment
 
+![deleted equipment](assets/images/deleted%20equipment.png)
+
 Real-time total cost calculation
 
-Persistent LocalStorage data
-
-Edit equipment entries
+![total cost calculation](assets/images/added%20equipment%20and%20grouped.png)
 
 6. Testing
-Manual Testing
 
-The application was tested for:
+Manual Testing 
 
-Form validation
-
-Correct addition of items
-
-Correct archiving and restoration
-
-Deletion functionality
-
-Accurate total recalculation
-
-LocalStorage persistence
-
-Responsive behaviour across breakpoints
+![Jest Testing](assets/images/jest-results.png)
 
 Tested on:
 
