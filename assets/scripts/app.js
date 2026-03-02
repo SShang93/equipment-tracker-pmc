@@ -73,6 +73,8 @@ if (typeof module !== "undefined") {
     escapeHtml,
     init,
     deps,
+    __setEquipmentList,
+    __getEquipmentList,
   };
 }
 
@@ -208,8 +210,8 @@ function archiveEquipment(id) {
   item.isArchived = true;
   item.archivedDate = new Date().toISOString().slice(0, 10);
 
-  saveToStorage(equipmentList);
-  render();
+  deps.saveToStorage(equipmentList);
+  deps.render();
 }
 
 function restoreEquipment(id) {
@@ -219,14 +221,14 @@ function restoreEquipment(id) {
   item.isArchived = false;
   item.archivedDate = null;
 
-  saveToStorage(equipmentList);
-  render();
+  deps.saveToStorage(equipmentList);
+  deps.render();
 }
 
 function deleteEquipment(id) {
   equipmentList = equipmentList.filter((x) => x.id !== id);
-  saveToStorage(equipmentList);
-  render();
+  deps.saveToStorage(equipmentList);
+  deps.render();
 }
 
 function calcTotal(list) {
@@ -245,13 +247,13 @@ function calcHireCost(rate, startDate) {
   const startDateOnly = new Date(
     start.getFullYear(),
     start.getMonth(),
-    start.getDate()
+    start.getDate(),
   );
 
   const todayDateOnly = new Date(
     today.getFullYear(),
     today.getMonth(),
-    today.getDate()
+    today.getDate(),
   );
 
   const diffMs = todayDateOnly - startDateOnly;
@@ -279,3 +281,13 @@ function escapeHtml(str) {
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
 }
+
+// State helpers for testing (not exported in browser) //
+function __setEquipmentList(list) {
+  equipmentList = list;
+}
+
+function __getEquipmentList() {
+  return equipmentList;
+}
+  
