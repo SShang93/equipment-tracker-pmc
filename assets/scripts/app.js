@@ -162,14 +162,14 @@ function renderGroupedBySite(items, containerEl, mode) {
       if (mode === "active") {
         li.innerHTML = `
           <strong>${escapeHtml(item.name)}</strong>
-          <span class="meta">${item.startDate} → ${item.archivedDate || "—"}</span>
+          <span class="meta">£${item.rate}/day since ${item.startDate}</span>
           <button data-action="archive" data-id="${item.id}">Archive</button>
           <button data-action="delete" data-id="${item.id}">Delete</button>
         `;
       } else {
         li.innerHTML = `
           <strong>${escapeHtml(item.name)}</strong>
-          <span class="meta">Archived ${item.archivedDate || ""}</span>
+          <span class="meta">${item.startDate} → ${item.archivedDate || "—"}</span>
           <button data-action="restore" data-id="${item.id}">Restore</button>
           <button data-action="delete" data-id="${item.id}">Delete</button>
         `;
