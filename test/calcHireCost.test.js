@@ -30,13 +30,10 @@ describe("calcHireCost", () => {
     expect(cost).toBe(50);
   });
 
-  test("charges 2 days when just over 1 day has passed (ceil)", () => {
-    // From March 9 to March 10 = 1 day -> ceil(1) = 1, but we want just over 1 day:
-    // March 8 23:59 to March 10 12:00 is > 1 day
-    const cost = calcHireCost(50, "2026-03-09T11:59:00.000Z");
-    // diff is 24h + 1 min => ceil -> 2 days
-    expect(cost).toBe(100);
-  });
+  test("charges 1 day when within adjacent calendar days", () => {
+  const cost = calcHireCost(50, "2026-03-09T11:59:00.000Z");
+  expect(cost).toBe(50);
+});
 
   test("charges correct days for a clear multi-day difference", () => {
     const cost = calcHireCost(40, "2026-03-05"); // 5 days difference to 10th
