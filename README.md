@@ -26,45 +26,33 @@ A Responsive Equipment Hire Management Application
 
 2.User Experience (UX)
 ---
-*Target Audience
+Target Audience:
 
-*Site Supervisors
+Site Supervisors, Project Managers, Small Construction Businesses
 
-*Project Managers
+These users require:
 
-*Small Construction Businesses
+Quick visibility of hired assets, Clear cost tracking, Mobile accessibility on site
 
-*These users require:
-
-*Quick visibility of hired assets
-
-*Clear cost tracking
-
-*Mobile accessibility on site
-
-*Minimal learning curve
 
 ## User Stories
 
-Equipment Management
+As a supervisor, I want to add hired equipment so that I can track what is currently on hire.
 
-*As a supervisor, I want to add hired equipment so that I can track what is currently on hire.
+As a supervisor, I want to archive equipment when it is off-hired so that the active list remains accurate.
 
-*As a supervisor, I want to archive equipment when it is off-hired so that the active list remains accurate.
+As a supervisor, I want to restore archived items if archived incorrectly.
 
-*As a supervisor, I want to restore archived items if archived incorrectly.
+As a supervisor, I want to delete incorrect entries.
 
-*As a supervisor, I want to delete incorrect entries.
+Cost Tracking
 
-*Cost Tracking
+As a project manager, I want to see real-time total hire cost so that I can monitor financial exposure.
 
-*As a project manager, I want to see real-time total hire cost so that I can monitor financial exposure.
-
-*As a manager, I want archived items to show start → end dates so that I can review hire duration.
+As a manager, I want archived items to show start → end dates so that I can review hire duration.
 
 ### Accessibility & Responsiveness
----
-*As a user, I want the application to function on mobile, tablet and desktop devices.
+As a user, I want the application to function on mobile, tablet and desktop devices.
 ---
 3.Design
 ---
@@ -150,92 +138,93 @@ Real-time total cost calculation
 
 6. Testing
 
-Manual Testing 
+Jest testing
 
 ![Jest Testing](assets/images/jest-results.png)
 
 Tested on:
 
-Chrome
+Chrome ![chrome](assets/images/chrome%20test.png)
 
-Safari
+Safari ![safari](assets/images/safari%20test.png)
 
-Mobile viewports (320px–430px)
+Firefox ![firefox](assets/images/firefox%20test.png)
 
-Tablet (768px)
-
-Automated Testing (Jest)
-
-Core logic functions were unit tested:
-
-Cost calculation
-
-Total aggregation
-
-Data manipulation functions
-
-All tests pass successfully.
-
-Run tests:
-npm install
-npm test
-
-7.Code Structure & Maintainability
+Mobile ![mobile](assets/images/320-top.png)
 
 ## State Management
 ---
-All equipment data is stored in a central equipmentList array.
+All equipment data is stored in a central equipmentList array, which acts as the single source of truth for the application.
+All UI rendering and cost calculations derive from this state, ensuring predictable and consistent behaviour.
 
-Separation of Concerns
+This state-driven approach simplifies debugging, improves maintainability, and ensures that every UI update reflects the latest data.
 
-Rendering logic separated from calculation logic
+### Separation of Concerns
+--- 
+The application architecture intentionally separates responsibilities:
 
-Storage wrapped in dedicated functions
+Rendering logic is responsible only for updating the DOM.
 
-Event delegation used for dynamic buttons
+Calculation logic handles cost computation and aggregation.
 
-Mode-based rendering reduces duplication
+Storage logic manages interaction with LocalStorage.
 
-Scalability Considerations
+Event handling logic manages user interactions through delegated listeners.
 
-The LocalStorage wrapper allows easy migration to a backend API in future versions.
+This separation reduces tight coupling between components and makes the codebase easier to extend and test.
+
+### Event Delegation
+---
+Event delegation is used for dynamic list items (Archive, Restore, Delete buttons).
+
+Rather than attaching individual listeners to each element, a single delegated listener handles interactions based on data-action attributes.
+
+This approach:
+
+Improves performance
+
+Prevents duplicate event bindings
+
+Keeps DOM manipulation clean
+
+Supports dynamic rendering without re-binding events
+
+### Mode-Based Rendering
+---
+A single rendering function handles both Active and Archived views using a mode parameter.
+
+This design:
+
+Eliminates duplicated rendering logic
+
+Improves readability
+
+Simplifies future feature expansion
+
+Reduces maintenance complexity
+
+### Scalability Considerations
+---
+Although the current implementation uses LocalStorage, storage access is abstracted through dedicated wrapper functions.
+
+This allows:
+
+Future replacement with a REST API
+
+Migration to a database-backed solution
+
+Integration with authentication
+
+### Multi-user expansion
+---
+The current structure mirrors patterns commonly used in scalable front-end applications, providing a clear pathway to production-level architecture.
 
 8. Deployment
 
-The project is deployed using GitHub Pages.
+The project is deployed via GitHub Pages by pushing the code to GitHub, enabling Pages in the repository settings, selecting the main branch root as the source, and accessing the generated GitHub Pages URL.
 
-Deployment Steps:
+9. Reflection
 
-Push code to GitHub
+This project demonstrates structured planning through user stories, state-driven UI rendering, real-world problem solving, responsive design implementation, automated logic testing, and forward-thinking architectural decisions.
 
-Enable Pages in repository settings
-
-Deploy from main branch root
-
-Access via generated GitHub Pages link
-
-9. Known Issues
-
-Data is stored locally per browser
-
-No authentication layer
-
-Editing functionality not implemented
-
-10. Reflection
-
-This project demonstrates:
-
-Structured planning through user stories
-
-State-driven UI rendering
-
-Practical real-world problem solving
-
-Responsive design implementation
-
-Automated logic testing
-
-Awareness of scalability and architectural decisions
-
-The project forms the foundation of a scalable construction SaaS product.
+It establishes a strong foundation for a scalable construction-focused SaaS application.
