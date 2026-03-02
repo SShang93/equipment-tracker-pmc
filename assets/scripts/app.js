@@ -142,7 +142,6 @@ function render() {
 function renderGroupedBySite(items, containerEl, mode) {
   const groups = groupBySite(items);
 
-  // if empty
   const sites = Object.keys(groups).sort((a, b) => a.localeCompare(b));
   if (sites.length === 0) {
     containerEl.innerHTML = "<li class='meta'>No items</li>";
@@ -150,12 +149,10 @@ function renderGroupedBySite(items, containerEl, mode) {
   }
 
   sites.forEach((siteName) => {
-    // Site heading
     const siteHeader = document.createElement("li");
     siteHeader.innerHTML = `<h3>${escapeHtml(siteName)}</h3>`;
     containerEl.appendChild(siteHeader);
 
-    // Items under site
     groups[siteName].forEach((item) => {
       const li = document.createElement("li");
 
@@ -179,9 +176,9 @@ function renderGroupedBySite(items, containerEl, mode) {
     });
   });
 
-  // Keep your event delegation
   containerEl.onclick = handleListClick;
 }
+
 
 function groupBySite(items) {
   return items.reduce((acc, item) => {
