@@ -166,7 +166,7 @@ function renderGroupedBySite(items, containerEl, mode) {
       } else {
         li.innerHTML = `
           <strong>${escapeHtml(item.name)}</strong>
-          <span class="meta">${item.startDate} → ${item.archivedDate || "—"}</span>
+          <span class="meta">${item.startDate} to ${item.archivedDate || "—"}</span>
           <button data-action="restore" data-id="${item.id}">Restore</button>
           <button data-action="delete" data-id="${item.id}">Delete</button>
         `;
