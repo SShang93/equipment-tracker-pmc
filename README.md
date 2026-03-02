@@ -152,6 +152,15 @@ Jest testing
 
 ![Jest Testing](assets/images/jest-results.png)
 
+Validation
+
+Desktop
+![Desktop Validation](assets/images/desktop-lighthouse-audit.png
+)
+
+Mobile
+![Mobile Validation](assets/images/mobile-lighthouse-audit.png)
+
 Tested on:
 
 Chrome ![chrome](assets/images/chrome%20test.png)
