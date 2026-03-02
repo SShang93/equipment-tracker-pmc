@@ -1,8 +1,8 @@
-// ---------- STATE ---------- //
+// State //
 const STORAGE_KEY = "equipmentTracker_v1";
 let equipmentList = [];
 
-// ---------- ELEMENTS ---------- //
+// Targetted Elements //
 const form = document.getElementById("equipment-form");
 const nameInput = document.getElementById("name");
 const siteInput = document.getElementById("site");
@@ -15,7 +15,7 @@ const archivedListEl = document.getElementById("archived-list");
 const totalActiveEl = document.getElementById("total-active");
 const totalArchivedEl = document.getElementById("total-archived");
 
-// ---------- DEPS (for testing) ---------- //
+// Dependencies for testing //
 const deps = {
   createEquipment,
   saveToStorage,
@@ -24,7 +24,7 @@ const deps = {
   calcHireCost,
 };
 
-// ---------- INIT ---------- //
+// initialization //
 function init() {
   // Prevent crashes if DOM not present (e.g. during Jest tests)
   if (
@@ -48,12 +48,12 @@ function init() {
   });
 }
 
-// Only auto-run in browser
+// Only auto-run in browser // (allows functions to be imported for testing without side effects)
 if (typeof window !== "undefined") {
   init();
 }
 
-// Export for Jest
+// Export for Jest // (in browser, this will be ignored since module is undefined)
 if (typeof module !== "undefined") {
   module.exports = {
     setDefaultStartDate,
@@ -79,10 +79,10 @@ if (typeof module !== "undefined") {
   };
 }
 
-// FUNCTIONS //
+// Functions //
 
 function setDefaultStartDate() {
-  // sets the date input to today if it is empty
+  // sets the date input to today if it is empty // (but doesn't override if user has already selected a date)
   if (!startDateInput.value) {
     const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
     startDateInput.value = today;
@@ -120,7 +120,7 @@ function createEquipment(name, site, rate, startDate) {
 }
 
 function generateId() {
-  // simple unique id
+  // simple unique id generator using timestamp and random string
   return Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
 }
 
@@ -134,7 +134,7 @@ function render() {
   renderGroupedBySite(activeItems, activeListEl, "active");
   renderGroupedBySite(archivedItems, archivedListEl, "archived");
 
-  // totals
+  // totals //
   totalActiveEl.textContent = calcTotal(activeItems).toFixed(2);
   totalArchivedEl.textContent = calcTotal(archivedItems).toFixed(2);
 }
@@ -259,7 +259,7 @@ function calcHireCost(rate, startDate) {
   return rate * days;
 }
 
-// ---------- STORAGE ----------
+// Storage //
 function saveToStorage(data) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
 }
@@ -269,7 +269,7 @@ function loadFromStorage() {
   return raw ? JSON.parse(raw) : [];
 }
 
-// ---------- SAFETY ----------
+// safety //
 function escapeHtml(str) {
   return String(str)
     .replaceAll("&", "&amp;")
