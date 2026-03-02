@@ -33,7 +33,17 @@ Site Supervisors, Project Managers, Small Construction Businesses
 These users require:
 
 Quick visibility of hired assets, Clear cost tracking, Mobile accessibility on site
+---
 
+## Wireframes
+
+Desktop Wireframe ![Desktop Woreframe](assets/images/desktop%20wirefram.png)
+
+Tablet Wireframe ![Tablet Wireframe](assets/images/ipad%20wirefram.png)
+
+Mobile Wireframe ![Mobile Wireframe](assets/images/mobile%20wireframe.png)
+
+--- 
 
 ## User Stories
 
