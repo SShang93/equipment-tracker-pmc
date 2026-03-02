@@ -21,6 +21,7 @@ const deps = {
   saveToStorage,
   setDefaultStartDate,
   render,
+  calcHireCost,
 };
 
 // ---------- INIT ---------- //
@@ -232,10 +233,9 @@ function deleteEquipment(id) {
 }
 
 function calcTotal(list) {
-  // simple total: rate * days since start
   return list.reduce(
-    (sum, item) => sum + calcHireCost(item.rate, item.startDate),
-    0,
+    (sum, item) => sum + deps.calcHireCost(item.rate, item.startDate),
+    0
   );
 }
 
@@ -290,4 +290,3 @@ function __setEquipmentList(list) {
 function __getEquipmentList() {
   return equipmentList;
 }
-  
