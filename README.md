@@ -4,7 +4,7 @@ A Responsive Equipment Hire Management Application
 
 [Live projecct](https://sshang93.github.io/equipment-tracker-pmc/)
 
-![Responsive design](assets/images/Screenshot%202026-03-02%20at%2016.38.55.png)
+![Responsive design](assets/images/responsive-design.png)
 
 1. Project Goals
 ---
@@ -37,11 +37,11 @@ Quick visibility of hired assets, Clear cost tracking, Mobile accessibility on s
 
 ## Wireframes
 
-Desktop Wireframe ![Desktop Woreframe](assets/images/desktop%20wirefram.png)
+Desktop Wireframe ![Desktop Woreframe](assets/images/desktop-wireframe.png)
 
-Tablet Wireframe ![Tablet Wireframe](assets/images/ipad%20wirefram.png)
+Tablet Wireframe ![Tablet Wireframe](assets/images/ipad-wireframe.png)
 
-Mobile Wireframe ![Mobile Wireframe](assets/images/mobile%20wireframe.png)
+Mobile Wireframe ![Mobile Wireframe](assets/images/mobile-wireframe.png)
 
 --- 
 
@@ -92,7 +92,7 @@ The interface follows a SaaS-style layout:
 
 ## Media queries applied for:
 
-* 320px (small phones)  ![320px](assets/images/320-top.png) ![320](assets/images/320-middle.png) ![320](assets/images/Screenshot%202026-03-02%20at%2017.14.34.png)
+* 320px (small phones)  ![320px](assets/images/320-top.png) ![320](assets/images/320-middle.png) ![320](assets/images/320-bottom.png)
 
 * 393px–430px (modern iPhones) ![425](assets/images/425-top.png) ![425](assets/images/425-middle.png) ![425](assets/images/425-bottom.png)
 
@@ -122,54 +122,58 @@ Jest (unit testing)
 
 Add equipment with validation
 
-![Add Equipment](assets/images/equipment%20added.png)
-![Equipment added to list](assets/images/added%20equipment%20and%20grouped.png)
+![Add Equipment](assets/images/equipment-added.png)
+![Equipment added to list](assets/images/added-equipment-and-grouped.png)
 
 Group equipment by site
 
-![Grouped equipment by site](assets/images/added%20equipment%20and%20grouped.png)
+![Grouped equipment by site](assets/images/added-equipment-and-grouped.png)
 
 Archive equipment (auto records end date)
 
-![Archived equipment](assets/images/archived%20equipment.png)
+![Archived equipment](assets/images/archived-equipment.png)
 
 Restore archived equipment
 
-![restored equipment](assets/images/archived%20to%20active.png)
-![restored confirmed](assets/images/archive%20to%20active%20confirmed.png)
+![restored equipment](assets/images/archived-to-active.png)
+![restored confirmed](assets/images/archive-to-active-confirmed.png)
 
 Delete equipment
 
-![deleted equipment](assets/images/deleted%20equipment.png)
+![deleted equipment](assets/images/deleted-equipment.png)
 
 Real-time total cost calculation
 
-![total cost calculation](assets/images/added%20equipment%20and%20grouped.png)
+![total cost calculation](assets/images/added-equipment-and-grouped.png)
 
 6. Testing
 
 Jest testing
+
+Manual testing is completed by developers themselves and used to explore the app by testing form inputs, checking UI responsiveness, and trying to break it with invalid inputs.
+It’s used for catching usability issues and unexpected behaviour early on. Automated testing uses tools like Jest to run fast, repeatable checks on code. It’s ideal for validating core functions like calcHireCost(), calcTotal(), deleteEquipment(), and local storage logic. Manual testing finds problems, automated testing prevents them from coming back.
 
 ![Jest Testing](assets/images/jest-results.png)
 
 Validation
 
 Desktop
-![Desktop Validation](assets/images/desktop-lighthouse-audit.png
-)
+![Desktop Validation](assets/images/desktop-lighthouse-audit.png)
 
 Mobile
 ![Mobile Validation](assets/images/mobile-lighthouse-audit.png)
 
 Tested on:
 
-Chrome ![chrome](assets/images/chrome%20test.png)
+Chrome ![chrome](assets/images/chrome-test.png)
 
-Safari ![safari](assets/images/safari%20test.png)
+Safari ![safari](assets/images/safari-test.png)
 
-Firefox ![firefox](assets/images/firefox%20test.png)
+Firefox ![firefox](assets/images/firefox-test.png)
 
 Mobile ![mobile](assets/images/320-top.png)
+
+JS Lint ![JS Lint](assets/images/jsLint.png)
 
 ## State Management
 ---

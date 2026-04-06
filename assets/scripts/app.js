@@ -18,10 +18,10 @@ const totalArchivedEl = document.getElementById("total-archived");
 // Dependencies for testing //
 const deps = {
   createEquipment,
-  saveToStorage,
-  setDefaultStartDate,
-  render,
   calcHireCost,
+  saveToStorage,
+  render,
+  setDefaultStartDate,
 };
 
 // initialization //
@@ -42,36 +42,36 @@ function init() {
   setDefaultStartDate();
   render();
 
-  form.addEventListener("submit", (e) => {
+  form.addEventListener("submit", function (e) {
     e.preventDefault();
     addEquipmentFromForm();
   });
 }
 
-// Only auto-run in browser // (allows functions to be imported for testing without side effects)
+// Only auto-run in browser //
 if (typeof window !== "undefined") {
   init();
 }
 
-// Export for Jest // (in browser, this will be ignored since module is undefined)
+// Export for Jest //
 if (typeof module !== "undefined") {
   module.exports = {
-    setDefaultStartDate,
     addEquipmentFromForm,
     createEquipment,
+    setDefaultStartDate,
     generateId,
-    render,
-    renderGroupedBySite,
     groupBySite,
-    handleListClick,
+    render,
     archiveEquipment,
-    restoreEquipment,
-    deleteEquipment,
+    renderGroupedBySite,
+    handleListClick,
     calcTotal,
     calcHireCost,
-    saveToStorage,
-    loadFromStorage,
+    deleteEquipment,
+    restoreEquipment,
     escapeHtml,
+    loadFromStorage,
+    saveToStorage,
     init,
     deps,
     __setEquipmentList,
@@ -82,7 +82,7 @@ if (typeof module !== "undefined") {
 // Functions //
 
 function setDefaultStartDate() {
-  // sets the date input to today if it is empty // (but doesn't override if user has already selected a date)
+  // sets the date input to today if it is empty //
   if (!startDateInput.value) {
     const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
     startDateInput.value = today;
@@ -275,7 +275,7 @@ function escapeHtml(str) {
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
+    .replaceAll("", "&quot;")
     .replaceAll("'", "&#039;");
 }
 
